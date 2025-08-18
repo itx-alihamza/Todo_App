@@ -8,23 +8,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:template/main.dart';
+import 'package:template/screens/home/homePage.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('TODO app loads correctly', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that our TODO app title is present.
+    expect(find.text('TODO APP'), findsOneWidget);
+    
+    // Verify that the floating action button is present.
+    expect(find.byIcon(Icons.add), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
+    // Tap the '+' icon to navigate to add task screen.
     await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pumpAndSettle(); // Wait for navigation animation
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that we're on the add task screen.
+    expect(find.text('Add Task'), findsOneWidget);
   });
 }
