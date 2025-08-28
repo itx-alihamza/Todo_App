@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.5.3 # for storing user preferences in app  
+  table_calendar: ^3.2.0
 
   flutter_svg: ^2.0.7 #for using svgs in app
   # The following adds the Cupertino Icons font to your application.

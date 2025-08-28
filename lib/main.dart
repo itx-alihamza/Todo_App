@@ -4,10 +4,9 @@ import 'screens/home/homePage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize SharedPreferences service
   await PreferencesService.init();
-  
+
   runApp(const MyApp());
 }
-

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:template/screens/todo/complete_todos.dart';
 // import 'package:template/screens/todo/edit_todo_screen.dart';
 import 'package:template/models/todo.dart'; // Import Todo model
-import 'package:template/utils/constants.dart';
+import 'package:template/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:template/utils/preferences_service.dart';
