@@ -5,7 +5,7 @@ import 'package:template/constants.dart';
 import '../../utils/preferences_service.dart';
 
 class CompleteTodos extends StatefulWidget {
-  CompleteTodos({Key? key}) : super(key: key);
+  const CompleteTodos({super.key});
 
   @override
   _CompleteTodosState createState() => _CompleteTodosState();
@@ -79,65 +79,61 @@ class _CompleteTodosState extends State<CompleteTodos> {
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 6),
                     children: <Widget>[
                       // Display only completed todos
-                      ...completedTodos
-                          .map((todo) => Container(
-                                height: 80,
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.symmetric(horizontal: 25.0),
-                                decoration: BoxDecoration(
-                                    color: Color.fromARGB(252, 255, 255, 255),
-                                    borderRadius: BorderRadius.circular(23),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromARGB(250, 14, 7, 7),
-                                        blurRadius: 8,
-                                        offset: Offset(0, 3),
-                                        blurStyle: BlurStyle.normal,
-                                      )
-                                    ]),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            todo.title,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 20,
-                                              decoration: TextDecoration
-                                                  .lineThrough, // Show completed with strikethrough
-                                              color: Colors.grey[600],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 2,
-                                          ),
-                                          Text(
-                                            todo.detail,
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.grey[500]),
-                                          )
-                                        ],
+                      ...completedTodos.map((todo) => Container(
+                            height: 80,
+                            margin: EdgeInsets.all(5),
+                            padding: EdgeInsets.symmetric(horizontal: 25.0),
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(252, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(23),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromARGB(250, 14, 7, 7),
+                                    blurRadius: 8,
+                                    offset: Offset(0, 3),
+                                    blurStyle: BlurStyle.normal,
+                                  )
+                                ]),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        todo.title,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20,
+                                          decoration: TextDecoration
+                                              .lineThrough, // Show completed with strikethrough
+                                          color: Colors.grey[600],
+                                        ),
                                       ),
-                                    ),
-                                    // Add completion indicator
-                                    Icon(
-                                      Icons.check_circle,
-                                      color: Colors.green,
-                                      size: 30,
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        height: 2,
+                                      ),
+                                      Text(
+                                        todo.detail,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.grey[500]),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ))
-                          .toList()
+                                // Add completion indicator
+                                Icon(
+                                  Icons.check_circle,
+                                  color: Colors.green,
+                                  size: 30,
+                                ),
+                              ],
+                            ),
+                          ))
                     ],
                   ),
       ),

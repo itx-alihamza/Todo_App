@@ -29,7 +29,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
 class EditTaskForm extends StatefulWidget {
   final Todo todo; // Changed from List<Todo> to single Todo
 
-  EditTaskForm({super.key, required this.todo});
+  const EditTaskForm({super.key, required this.todo});
 
   @override
   State<EditTaskForm> createState() => _EditTaskFormState();

@@ -62,8 +62,8 @@ class Todo {
     );
   }
 
-  @override
-  String toString() {
-    return 'Todo(id: $id, title: $title, detail: $detail, isCompleted: $isCompleted)';
-  }
+  // @override
+  // String toString() {
+  //   return 'Todo(id: $id, title: $title, detail: $detail, isCompleted: $isCompleted)';
+  // }
 }

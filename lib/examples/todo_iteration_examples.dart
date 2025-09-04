@@ -3,6 +3,8 @@ import '../models/todo.dart';
 import '../utils/preferences_service.dart';
 
 class TodoIterationExamples extends StatefulWidget {
+  const TodoIterationExamples({super.key});
+
   @override
   _TodoIterationExamplesState createState() => _TodoIterationExamplesState();
 }
@@ -35,10 +37,11 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
 
   // METHOD 3: Search todos by title
   List<Todo> searchTodos(String query) {
-    return todos.where((todo) => 
-      todo.title.toLowerCase().contains(query.toLowerCase()) ||
-      todo.detail.toLowerCase().contains(query.toLowerCase())
-    ).toList();
+    return todos
+        .where((todo) =>
+            todo.title.toLowerCase().contains(query.toLowerCase()) ||
+            todo.detail.toLowerCase().contains(query.toLowerCase()))
+        .toList();
   }
 
   // METHOD 4: Get specific todo by ID
@@ -138,16 +141,14 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
                       // Example: Count completed vs incomplete
                       int completed = getCompletedTodos().length;
                       int incomplete = getIncompleteTodos().length;
-                      
+
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
                           title: Text('Todo Statistics'),
-                          content: Text(
-                            'Total: ${todos.length}\n'
-                            'Completed: $completed\n'
-                            'Incomplete: $incomplete'
-                          ),
+                          content: Text('Total: ${todos.length}\n'
+                              'Completed: $completed\n'
+                              'Incomplete: $incomplete'),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context),
@@ -164,7 +165,8 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
                     onPressed: () {
                       // Example: Find todos with "work" in title
                       List<Todo> workTodos = searchTodos('work');
-                      print('Found ${workTodos.length} todos containing "work"');
+                      print(
+                          'Found ${workTodos.length} todos containing "work"');
                       for (Todo todo in workTodos) {
                         print('- ${todo.title}');
                       }
@@ -179,8 +181,8 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: loadTodos,
-        child: Icon(Icons.refresh),
         tooltip: 'Refresh Todos',
+        child: Icon(Icons.refresh),
       ),
     );
   }
@@ -206,14 +208,16 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
           ),
           SizedBox(height: 8),
           child.runtimeType == Column && (child as Column).children.isEmpty
-              ? Text('No todos in this category', style: TextStyle(color: Colors.grey))
+              ? Text('No todos in this category',
+                  style: TextStyle(color: Colors.grey))
               : child,
         ],
       ),
     );
   }
 
-  Widget _buildTodoCard(Todo todo, {
+  Widget _buildTodoCard(
+    Todo todo, {
     bool showCompleted = false,
     bool showIncomplete = false,
     bool showDate = false,
@@ -225,14 +229,17 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
         color: todo.isCompleted ? Colors.green.shade50 : Colors.blue.shade50,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: todo.isCompleted ? Colors.green.shade200 : Colors.blue.shade200,
+          color:
+              todo.isCompleted ? Colors.green.shade200 : Colors.blue.shade200,
         ),
       ),
       child: Row(
         children: [
           // Completion indicator
           Icon(
-            todo.isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
+            todo.isCompleted
+                ? Icons.check_circle
+                : Icons.radio_button_unchecked,
             color: todo.isCompleted ? Colors.green : Colors.grey,
           ),
           SizedBox(width: 12),
@@ -245,7 +252,8 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
                   todo.title,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    decoration: todo.isCompleted ? TextDecoration.lineThrough : null,
+                    decoration:
+                        todo.isCompleted ? TextDecoration.lineThrough : null,
                   ),
                 ),
                 if (todo.detail.isNotEmpty)
@@ -288,7 +296,8 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
               ),
               IconButton(
                 onPressed: () async {
-                  bool success = await PreferencesService.deleteTodoObject(todo.id);
+                  bool success =
+                      await PreferencesService.deleteTodoObject(todo.id);
                   if (success) {
                     loadTodos(); // Refresh the list
                   }
@@ -308,22 +317,22 @@ class _TodoIterationExamplesState extends State<TodoIterationExamples> {
 // =====================================================
 
 class TodoCodeExamples {
-  
   // Example 1: Basic iteration with for loop
   static void printAllTodos() {
     List<Todo> todos = PreferencesService.getTodoObjects();
-    
+
     print('=== All Todos ===');
     for (int i = 0; i < todos.length; i++) {
       Todo todo = todos[i];
-      print('${i + 1}. ${todo.title} - ${todo.isCompleted ? "Completed" : "Pending"}');
+      print(
+          '${i + 1}. ${todo.title} - ${todo.isCompleted ? "Completed" : "Pending"}');
     }
   }
 
   // Example 2: Enhanced for loop (for-each)
   static void printTodoDetails() {
     List<Todo> todos = PreferencesService.getTodoObjects();
-    
+
     for (Todo todo in todos) {
       print('ID: ${todo.id}');
       print('Title: ${todo.title}');
@@ -343,16 +352,17 @@ class TodoCodeExamples {
   // Example 4: Using where to filter
   static List<Todo> getUrgentTodos() {
     List<Todo> todos = PreferencesService.getTodoObjects();
-    return todos.where((todo) => 
-      todo.title.toLowerCase().contains('urgent') || 
-      todo.detail.toLowerCase().contains('urgent')
-    ).toList();
+    return todos
+        .where((todo) =>
+            todo.title.toLowerCase().contains('urgent') ||
+            todo.detail.toLowerCase().contains('urgent'))
+        .toList();
   }
 
   // Example 5: Counting specific todos
   static Map<String, int> getTodoStats() {
     List<Todo> todos = PreferencesService.getTodoObjects();
-    
+
     return {
       'total': todos.length,
       'completed': todos.where((todo) => todo.isCompleted).length,
@@ -364,7 +374,7 @@ class TodoCodeExamples {
   static Todo? getLatestTodo() {
     List<Todo> todos = PreferencesService.getTodoObjects();
     if (todos.isEmpty) return null;
-    
+
     todos.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     return todos.first;
   }
@@ -372,7 +382,7 @@ class TodoCodeExamples {
   // Example 7: Bulk operations
   static Future<void> markAllTodosComplete() async {
     List<Todo> todos = PreferencesService.getTodoObjects();
-    
+
     for (Todo todo in todos) {
       if (!todo.isCompleted) {
         await PreferencesService.updateTodoObject(todo.id, isCompleted: true);
@@ -388,16 +398,18 @@ class TodoCodeExamples {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
         }
-        
+
         List<Todo> todos = snapshot.data ?? [];
-        
+
         return ListView.builder(
           itemCount: todos.length,
           itemBuilder: (context, index) {
             Todo todo = todos[index];
             return ListTile(
               leading: Icon(
-                todo.isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
+                todo.isCompleted
+                    ? Icons.check_circle
+                    : Icons.radio_button_unchecked,
                 color: todo.isCompleted ? Colors.green : Colors.grey,
               ),
               title: Text(todo.title),
